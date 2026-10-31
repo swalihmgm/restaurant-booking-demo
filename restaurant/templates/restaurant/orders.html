@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>My orders</h1>
+        <table border="1" cellpadding="10">
+
+        <thead>
+            <tr>
+                <th>Booking ID</th>
+                <th>Food Item</th>
+                <th>Phone</th>
+                <th>Guests</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for order in orders %}
+
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.item }}</td>
+                <td>{{ order.phone }}</td>
+                <td>{{ order.number_of_guests }}</td>
+                <td>{{ order.booking_date }}</td>
+                <td>{{ order.booking_time }}</td>
+                <td>{{ order.get_status_display }}</td>
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="7">You have no order yet.</td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    <button><a href="{% url 'create_booking' %}">Create New Booking</a></button>
+</body>
+</html>

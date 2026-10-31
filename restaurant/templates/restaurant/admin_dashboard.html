@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+    <h1>Restaurant Admin Dashboard</h1>
+
+    <h2>All Bookings</h2>
+
+    <table  cellpadding="10">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Phone</th>
+                <th>Item</th>
+                <th>Guests</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Update Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for booking in bookings %}
+
+            <tr>
+                <td>{{ booking.user }}</td>
+                <td>{{ booking.phone }}</td>
+                <td>{{ booking.item }}</td>
+                <td>{{ booking.number_of_guests }}</td>
+                <td>{{ booking.booking_date }}</td>
+                <td>{{ booking.booking_time }}</td>
+                <td>{{ booking.get_status_display }}</td>
+
+                <td>
+                    <form method="POST"
+                        action="{% url 'update_booking_status' booking.id %}">
+
+                        {% csrf_token %}
+
+                        <select name="status">
+                            {% for value, label in booking.STATUS_CHOICES %}
+                                <option value="{{ value }}"
+                                    {% if booking.status == value %}
+                                        selected
+                                    {% endif %}>
+                                    {{ label }}
+                                </option>
+                            {% endfor %}
+                        </select>
+
+                        <button type="submit">Update</button>
+
+                    </form>
+                </td>
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="8">No bookings available.</td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

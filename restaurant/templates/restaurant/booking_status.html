@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Booking Details</h1>
+    <p>Customer: {{ booking.customer_name }}</p>
+    <p>Phone: {{ booking.phone }}</p>
+    <p>Item: {{ booking.item }}</p>
+    <p>Guests: {{ booking.number_of_guests }}</p>
+    <p>Date: {{ booking.booking_date }}</p>
+    <p>Time: {{ booking.booking_time }}</p>
+    <h3>Booking Status: {{ booking.get_status_display }}</h3>
+    <button><a href="{% url 'list_orders'%}"></a>My Orders</button>
+    <button><a href="{% url 'create_booking'%}"></a>Order Now</button>
+  </body>
+</html>
